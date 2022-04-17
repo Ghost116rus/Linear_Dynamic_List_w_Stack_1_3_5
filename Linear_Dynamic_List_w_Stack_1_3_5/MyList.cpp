@@ -19,9 +19,13 @@ Node* MyList::find(My_List* pHead, int find_data)
 
 	while (previous)
 	{
-		if ((previous->next_ptr)->data == find_data)
+		if (previous->next_ptr)
 		{
-			return previous;
+			if (previous->next_ptr->data == find_data)
+			{
+				return previous;
+			}
+
 		}
 
 		previous = previous->next_ptr;
@@ -36,6 +40,7 @@ void MyList::push_front(My_List* pHead, int data)
 	pHead->phead = new Node;
 	pHead->phead->data = data;
 	pHead->phead->next_ptr = Temp;
+	pHead->count++;
 }
 
 void MyList::add(My_List* pHead, int data, int find_data, bool after)
@@ -49,16 +54,17 @@ void MyList::add(My_List* pHead, int data, int find_data, bool after)
 
 	if (pHead->phead->data == find_data)
 	{
-		if (after)
+		if (!after)
 		{
-			push_front(pHead, data);					// Просто вставляем в начало
+			push_front(pHead, data);										// Просто вставляем в начало
 		}
 		else
 		{
-			node_ptr = pHead->phead->next_ptr;		// Запоминаем указатель на следующий элемент
-			pHead->phead->next_ptr = new Node;			// Создаем новый узел и записываем его после головы
-			pHead->phead->next_ptr->data = data;		// Заносим данные в созданный узел
-			pHead->phead->next_ptr->next_ptr = node_ptr;	// Заносим указатель на следующий элемент в созданный узел
+			node_ptr = pHead->phead->next_ptr;								// Запоминаем указатель на следующий элемент
+			pHead->phead->next_ptr = new Node;								// Создаем новый узел и записываем его после головы
+			pHead->phead->next_ptr->data = data;							// Заносим данные в созданный узел
+			pHead->phead->next_ptr->next_ptr = node_ptr;					// Заносим указатель на следующий элемент в созданный узел
+			pHead->count++; std::cout << "Добавление выполнено успешно\n";
 		}
 
 		return;
@@ -91,6 +97,14 @@ void MyList::remove(My_List* pHead, int find_data)
 {
 	if (pHead->count)
 	{
+		if (pHead->phead->data == find_data)
+		{
+			My_Stack::add(pHead->stack, pHead->phead);
+			pHead->phead = pHead->phead->next_ptr;
+			std::cout << "Удаление выполнено успешно\n"; pHead->count--;
+			return;
+		}
+
 		Node* previous = find(pHead, find_data);
 
 		if (previous)
@@ -98,6 +112,7 @@ void MyList::remove(My_List* pHead, int find_data)
 			My_Stack::add(pHead->stack, previous->next_ptr);
 			previous->next_ptr = (previous->next_ptr)->next_ptr;
 			pHead->count--;
+			std::cout << "Удаление выполнено успешно\n";
 		}
 		else
 		{

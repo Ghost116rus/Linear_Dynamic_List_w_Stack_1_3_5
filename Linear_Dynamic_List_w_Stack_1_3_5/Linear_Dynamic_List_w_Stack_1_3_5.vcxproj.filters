@@ -27,9 +27,15 @@
     <ClCompile Include="Stack.cpp">
       <Filter>Вспомогательные элементы</Filter>
     </ClCompile>
+    <ClCompile Include="User_interface.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyList.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="User_interface.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
