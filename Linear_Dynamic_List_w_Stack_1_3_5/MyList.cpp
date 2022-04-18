@@ -143,6 +143,11 @@ void MyList::cleanMemory(My_List* pHead)
 
 void MyList::show(My_List* pHead)
 {
+	if (!(pHead->count))
+	{
+		std::cout << "Список пустой!\n"; return;
+	}
+
 	int number = 1;
 	Node* current = pHead->phead;
 
