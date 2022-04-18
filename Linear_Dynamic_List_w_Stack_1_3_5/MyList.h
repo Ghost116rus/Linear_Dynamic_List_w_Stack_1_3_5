@@ -96,8 +96,17 @@ namespace MyList
 	/// <param name="find_data">Удаление </param>
 	void remove(My_List* pHead, int find_data);
 
+
+	/// <summary>
+	/// Функция очистки памяти
+	/// </summary>
+	/// <param name="pHead">Получает указатель на сам список</param>
 	void cleanMemory(My_List* pHead);
 
+	/// <summary>
+	/// Функция вывода на экран
+	/// </summary>
+	/// <param name="pHead"></param>
 	void show(My_List* pHead);
 
 }
