@@ -131,7 +131,6 @@ void menu(MyList::My_List* list)
 
 	while (user_choice != Exit)
 	{
-		int temp_data;
 		switch (user_choice)
 		{
 
