@@ -97,15 +97,18 @@ void MyList::remove(My_List* pHead, int find_data)
 {
 	if (pHead->count)
 	{
+		Node* previous;
+
 		if (pHead->phead->data == find_data)
 		{
-			My_Stack::add(pHead->stack, pHead->phead);
+			previous = pHead->phead;
 			pHead->phead = pHead->phead->next_ptr;
+			My_Stack::add(pHead->stack, previous);
 			std::cout << "Удаление выполнено успешно\n"; pHead->count--;
 			return;
 		}
 
-		Node* previous = find(pHead, find_data);
+		previous = find(pHead, find_data);
 
 		if (previous)
 		{

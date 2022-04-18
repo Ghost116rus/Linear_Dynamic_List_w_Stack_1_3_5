@@ -26,7 +26,6 @@ void My_Stack::add(stackElement*& previous_ptr, Node* node)
 
 	last_element->previous_element = previous_ptr;		// В новый элемент заносим указатель на предыдущий элемент стека
 	last_element->node = node;							// Заносим данные
-	last_element->node->next_ptr = nullptr;				// Это ему больше не потребуется
 
 	previous_ptr = last_element;						// Мы получали указатель на предыдущий элемент, сейчас делаем так, чтобы он указывал на последний элемент
 }
