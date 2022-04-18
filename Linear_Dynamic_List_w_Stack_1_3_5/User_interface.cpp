@@ -69,6 +69,55 @@ void write_author()
 	std::cout << "Работу выполнил Калеев Д.А., группа 4211\n";
 }
 
+void add_new_element(MyList::My_List* list)
+{
+	std::cout << "Введите, данные которые хотите добавить: ";
+	int temp_data = getValue(1, "Введите данные: ");
+
+	if (!(list->count_list))
+	{
+		MyList::push_front(list, list->phead, temp_data);
+	}
+	else
+	{
+		std::cout << "Введите элемент, от которого мы будем отталкиваться: ";
+		int find_data = getValue(Natural_number, "Введите элемент, от которого мы будем отталкиваться: ");
+
+		MyList::Node* previous = MyList::find(list->phead, find_data);
+
+		if (previous)
+		{
+			std::cout << "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ";
+			int after = getValue(O_Or_1, "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ");
+
+			MyList::add(list, previous, temp_data, after);
+		}
+		else
+		{
+			std::cout << "Заданный элемент не найден!\n";
+		}
+
+
+	}
+}
+
+void delete_element(MyList::My_List* list)
+{
+	std::cout << "Введите данные, которые хотели бы удалить: ";
+	int find_data = getValue(1, "Введите данные: ");
+
+	MyList::Node* previous = MyList::find(list->phead, find_data);
+
+	if (previous)
+	{
+		MyList::remove(list, previous);
+	}
+	else
+	{
+		std::cout << "Невозможно удалить, т.к заданый элемент не найден!\n";
+	}
+}
+
 
 
 void menu(MyList::My_List* list)
@@ -101,33 +150,11 @@ void menu(MyList::My_List* list)
 
 		case Add_new_element:
 
-			if (complete_init)
-			{
-
-				std::cout << "Введите, данные которые хотите добавить: ";
-				temp_data = getValue(1, "Введите данные: ");
-
-				if (!(list->count_list))
-				{
-					MyList::push_front((list), temp_data);
-				}
-				else
-				{
-					std::cout << "Введите элемент, от которого мы будем отталкиваться: ";
-					int find_data = getValue(Natural_number, "Введите элемент, от которого мы будем отталкиваться: ");
-
-					std::cout << "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ";
-					int after = getValue(O_Or_1, "Вы хотите вставить данные до заданного элемента или после? 0 - до, 1 - после\n Введите: ");
-
-					MyList::add(list, temp_data, find_data, after);
-				}
-
-			}
+			if (complete_init) { add_new_element(list); }
 			else
 			{
 				std::cout << "Невозможно выполнить операцию, т.к список не инициализирован\n";
 			}
-
 			break;
 
 		case Delete_element:
@@ -140,18 +167,13 @@ void menu(MyList::My_List* list)
 				}
 				else
 				{
-					std::cout << "Введите данные, которые хотели бы удалить: ";
-					temp_data = getValue(1, "Введите данные: ");
-					MyList::remove(list, temp_data);
+					delete_element(list);
 				}
-
 			}
 			else
 			{
 				std::cout << "Невозможно что-либо удалить, т.к список не инициализирован!\n";
 			}
-
-
 			break;
 
 		case Show_list:
@@ -163,17 +185,7 @@ void menu(MyList::My_List* list)
 
 		case Show_stack:
 
-			if (complete_init) 
-			{ 
-				if (list->stack)
-				{
-					MyList::show(list->stack, list->count_delete);
-				}
-				else
-				{
-					std::cout << "Стек пустой\n";
-				}
-			}
+			if (complete_init) { MyList::show(list->stack, list->count_delete); }
 			else { std::cout << "Список не инициализирован!\n"; }
 
 			break;

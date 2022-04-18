@@ -27,5 +27,11 @@ void show_main_menu();
 /*  Вывод информации об авторе  */
 void write_author();
 
+
+void add_new_element(MyList::My_List* list);
+
+
+void delete_element(MyList::My_List* list);
+
 /*  основная программная реализация интерфейса  */
-void menu(MyList::My_List* my_List);
+void menu(MyList::My_List* list);
