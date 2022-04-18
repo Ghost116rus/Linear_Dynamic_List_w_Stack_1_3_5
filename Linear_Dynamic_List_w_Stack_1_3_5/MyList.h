@@ -72,10 +72,28 @@ namespace MyList
 	/// <returns>Возращает указатель на предшествующий узел</returns>
 	Node* find(My_List* pHead, int find_data);
 
+
+	/// <summary>
+	/// Функция добавления узла в начало списка
+	/// </summary>
+	/// <param name="pHead">Получает указатель на сам список</param>
+	/// <param name="data">Получает данные, которые нужно будет занести в новый узел</param>
 	void push_front(My_List* pHead, int data);
 
+	/// <summary>
+	/// Функция добавления узла
+	/// </summary>
+	/// <param name="pHead">Получает указатель на сам список</param>
+	/// <param name="data">Получает данные, которые нужно будет занести в новый узел</param>
+	/// <param name="find_data">По данным выясняем какой узел нужно найти</param>
+	/// <param name="after">Выясняем нужно вставить после или до заданного</param>
 	void add(My_List* pHead, int data, int find_data, bool after);
 
+	/// <summary>
+	/// Функция удаления узла
+	/// </summary>
+	/// <param name="pHead">Получает указатель на сам список</param>
+	/// <param name="find_data">Удаление </param>
 	void remove(My_List* pHead, int find_data);
 
 	void cleanMemory(My_List* pHead);
