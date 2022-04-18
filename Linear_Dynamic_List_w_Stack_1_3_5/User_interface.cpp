@@ -107,7 +107,7 @@ void menu(MyList::My_List* list)
 				std::cout << "Введите, данные которые хотите добавить: ";
 				temp_data = getValue(1, "Введите данные: ");
 
-				if (!(list->count))
+				if (!(list->count_list))
 				{
 					MyList::push_front((list), temp_data);
 				}
@@ -134,7 +134,7 @@ void menu(MyList::My_List* list)
 
 			if (complete_init)
 			{
-				if (!(list->count))
+				if (!(list->count_list))
 				{
 					std::cout << "Список пустой!\n";
 				}
@@ -156,7 +156,7 @@ void menu(MyList::My_List* list)
 
 		case Show_list:
 
-			if (complete_init) { MyList::show(list); }
+			if (complete_init) { MyList::show(list->phead, list->count_list); }
 			else { std::cout << "Список не инициализирован!\n"; }
 
 			break;
@@ -167,7 +167,7 @@ void menu(MyList::My_List* list)
 			{ 
 				if (list->stack)
 				{
-					MyList::My_Stack::show(list->stack);
+					MyList::show(list->stack, list->count_delete);
 				}
 				else
 				{
@@ -196,6 +196,7 @@ void menu(MyList::My_List* list)
 		user_choice = getValue(Menu_Commands, "Выберите команду: ");
 	}
 
-	MyList::cleanMemory(list);
+	MyList::cleanMemory(list->phead);
+	MyList::cleanMemory(list->stack);
 	std::cout << "Завершение работы\n";
 }

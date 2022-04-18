@@ -14,7 +14,8 @@ namespace MyList
 	/* Сам список */
 	struct My_List
 	{
-		int count;
+		int count_list;
+		int count_delete;
 		Node* phead;
 		Node* stack;
 	};
@@ -41,7 +42,7 @@ namespace MyList
 
 	void cleanMemory(Node* pHead);
 
-	void MyList::show(Node* pHead, const int count);
+	void show(Node* pHead, const int count);
 
 }
 

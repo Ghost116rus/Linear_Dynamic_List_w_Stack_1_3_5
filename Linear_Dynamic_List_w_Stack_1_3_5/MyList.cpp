@@ -6,7 +6,8 @@ using namespace MyList;
 My_List* MyList::init()
 {
 	My_List* list = new My_List;
-	list->count = 0;
+	list->count_list = 0;
+	list->count_delete = 0;
 	list->phead = nullptr;
 	list->stack = nullptr;
 
@@ -40,7 +41,7 @@ void MyList::push_front(My_List* pHead, int data)
 	pHead->phead = new Node;
 	pHead->phead->data = data;
 	pHead->phead->next_ptr = Temp;
-	pHead->count++;
+	pHead->count_list++;
 }
 
 void MyList::add(My_List* pHead, int data, int find_data, bool after)
@@ -64,7 +65,7 @@ void MyList::add(My_List* pHead, int data, int find_data, bool after)
 			pHead->phead->next_ptr = new Node;								// Создаем новый узел и записываем его после головы
 			pHead->phead->next_ptr->data = data;							// Заносим данные в созданный узел
 			pHead->phead->next_ptr->next_ptr = node_ptr;					// Заносим указатель на следующий элемент в созданный узел
-			pHead->count++; std::cout << "Добавление выполнено успешно\n";
+			pHead->count_list++; std::cout << "Добавление выполнено успешно\n";
 		}
 
 		return;
@@ -85,7 +86,7 @@ void MyList::add(My_List* pHead, int data, int find_data, bool after)
 		node_ptr->next_ptr->data = data;		// Дальше заносим данные
 		node_ptr->next_ptr->next_ptr = next;	// и указатель на следующий элемент
 
-		pHead->count++; std::cout << "Добавление выполнено успешно\n";
+		pHead->count_list++; std::cout << "Добавление выполнено успешно\n";
 	}
 	else
 	{
@@ -95,16 +96,21 @@ void MyList::add(My_List* pHead, int data, int find_data, bool after)
 
 void MyList::remove(My_List* pHead, int find_data)
 {
-	if (pHead->count)
+	if (pHead->count_list)
 	{
-		Node* previous;
+		Node* Temp;
 
 		if (pHead->phead->data == find_data)
 		{
-			previous = pHead->phead;
+			Temp = pHead->phead;
 			pHead->phead = pHead->phead->next_ptr;
-			My_Stack::add(pHead->stack, previous);
-			std::cout << "Удаление выполнено успешно\n"; pHead->count--;
+			
+			Temp->next_ptr = pHead->stack;
+			pHead->stack = Temp;
+
+			std::cout << "Удаление выполнено успешно\n";
+			pHead->count_list--;
+			pHead->count_delete++;
 			return;
 		}
 
@@ -118,7 +124,7 @@ void MyList::remove(My_List* pHead, int find_data)
 			Temp->next_ptr = pHead->stack;
 			pHead->stack = Temp;
 
-			pHead->count--;
+			pHead->count_list--; pHead->count_delete++;
 			std::cout << "Удаление выполнено успешно\n";
 		}
 		else
@@ -145,7 +151,7 @@ void MyList::cleanMemory(Node* pHead)
 
 void MyList::show(Node* current, const int count) 
 {
-	if (!(pHead->count))
+	if (!(count))
 	{
 		std::cout << "Список пустой!\n"; return;
 	}

@@ -141,7 +141,6 @@
   <ItemGroup>
     <ClCompile Include="Linear_Dynamic_List_w_Stack_1_3_5.cpp" />
     <ClCompile Include="MyList.cpp" />
-    <ClCompile Include="Stack.cpp" />
     <ClCompile Include="User_interface.cpp" />
   </ItemGroup>
   <ItemGroup>

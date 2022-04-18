@@ -24,9 +24,6 @@
     <ClCompile Include="MyList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Stack.cpp">
-      <Filter>Вспомогательные элементы</Filter>
-    </ClCompile>
     <ClCompile Include="User_interface.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
