@@ -2,7 +2,6 @@
 
 using namespace MyList;
 
-
 My_List* MyList::init()
 {
 	My_List* list = new My_List;
@@ -33,40 +32,34 @@ Node* MyList::find(Node* pHead, int find_data)
 	return nullptr;
 }
 
-void MyList::push_front(My_List* list, Node* pHead, int data)
-{
-	Node* Temp = new Node;
-	Temp->data = data;
-	Temp->next_ptr = pHead->next_ptr;
-	pHead->next_ptr = Temp;
-	list->count_list++;
-}
 
-void MyList::add(My_List* list, Node* current, int data, bool after)
+void MyList::add(Node* previous, int data, bool after)
 {
-	if (after)								// В случае, если нужно вставить после искомого
+	if (after)
 	{
-		current = current->next_ptr;		// мы сразу берем следующий индекс
+		previous = previous->next_ptr;
 	}
 
-	Node* next = current->next_ptr;		// Запоминаем указатель на следующий элемент
-	current->next_ptr = new Node;			// И создаем новый узел
+	Node* temp = new Node();
+	temp->data = data;
+	temp->next_ptr = previous->next_ptr;
+	previous->next_ptr = temp;
 
-	current->next_ptr->data = data;		// Дальше заносим данные
-	current->next_ptr->next_ptr = next;	// и указатель на следующий элемент
-
-	list->count_list++; std::cout << "Добавление выполнено успешно\n";
-
+	std::cout << "Добавление выполнено успешно\n";
 }
 
-void MyList::remove(My_List* list, Node* previous)
+void addNode(Node* stack, Node* data)
+{
+	data->next_ptr = stack->next_ptr;
+	stack->next_ptr = data;
+}
+
+void MyList::remove(Node* previous, Node* stack)
 {
 	Node* Temp = previous->next_ptr;
 	previous->next_ptr = (previous->next_ptr)->next_ptr;
-	Temp->next_ptr = list->stack->next_ptr;
-	list->stack->next_ptr = Temp;
 
-	list->count_list--; list->count_delete++;
+	addNode(stack, Temp);
 
 	std::cout << "Удаление выполнено успешно\n";
 }
@@ -81,19 +74,19 @@ void MyList::cleanMemory(Node* pHead)
 	}
 }
 
-void MyList::show(Node* head, const int count) 
+void MyList::show(Node* head, std::string message) 
 {
-	if (!(count))
+	head = head->next_ptr;
+
+	if (!(head))
 	{
 		std::cout << "Список пустой!\n"; return;
 	}
 
 	int number = 1;
-	head = head->next_ptr;
-
 	while (head)
 	{
-		std::cout << number++ << "-ый элемент списка, Данные: " << head->data << "\n";
+		std::cout << number++ << "-ый элемент " << message << ", Данные: " << head->data << "\n";
 		head = head->next_ptr;
 	}
 }
